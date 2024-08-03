@@ -3,12 +3,12 @@
  * Time :13:03
  * Project Name :StudentManagment
  * */
-package lk.ijse.studentmanagment.DAO.Impl;
+package lk.ijse.studentmanagement.DAO.Impl;
 
 import jakarta.json.bind.Jsonb;
 import jakarta.json.bind.JsonbBuilder;
-import lk.ijse.studentmanagment.DAO.StudentData;
-import lk.ijse.studentmanagment.Dto.StudentDto;
+import lk.ijse.studentmanagement.DAO.StudentData;
+import lk.ijse.studentmanagement.Dto.StudentDto;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -38,7 +38,6 @@ public class StudentDataProcess implements StudentData {
                 studentDto.setCity(resultSet.getString("city"));
                 studentDto.setAge(resultSet.getString("age"));
                 studentDtoList.add(studentDto);
-
             }
             Jsonb jsonb = JsonbBuilder.create();
             return jsonb.toJson(studentDtoList);

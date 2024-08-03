@@ -3,7 +3,7 @@
  * Time :14:18
  * Project Name :StudentManagment
  * */
-package lk.ijse.studentmanagment.Controller;
+package lk.ijse.studentmanagement.controller;
 
 import jakarta.json.bind.Jsonb;
 import jakarta.json.bind.JsonbBuilder;
@@ -12,12 +12,15 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import lk.ijse.studentmanagment.DAO.Impl.StudentDataProcess;
-import lk.ijse.studentmanagment.DAO.StudentData;
-import lk.ijse.studentmanagment.Dto.StudentDto;
-import lk.ijse.studentmanagment.Util.UtilProcess;
+import lk.ijse.studentmanagement.DAO.Impl.StudentDataProcess;
+import lk.ijse.studentmanagement.DAO.StudentData;
+import lk.ijse.studentmanagement.Dto.StudentDto;
+import lk.ijse.studentmanagement.Util.UtilProcess;
+
 import java.io.IOException;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 @WebServlet(urlPatterns = "/student")
 public class StudentController extends HttpServlet {
