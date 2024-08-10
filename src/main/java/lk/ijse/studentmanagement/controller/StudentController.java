@@ -60,7 +60,7 @@ public class StudentController extends HttpServlet {
             resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
         }
 
-        // Persist Data
+        // Persist Data //try with resource
         try (var writer = resp.getWriter()){
             Jsonb jsonb = JsonbBuilder.create();
             StudentDto studentDTO = jsonb.fromJson(req.getReader(), StudentDto.class);
