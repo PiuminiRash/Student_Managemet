@@ -1,4 +1,4 @@
-package lk.ijse.studentmanagement.controller;
+package studentmanagement.Controller;
 
 import jakarta.json.bind.Jsonb;
 import jakarta.json.bind.JsonbBuilder;
@@ -7,19 +7,21 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import lk.ijse.studentmanagement.DAO.Impl.StudentDataProcess;
-import lk.ijse.studentmanagement.Dto.StudentDto;
-import lk.ijse.studentmanagement.Util.UtilProcess;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import studentmanagement.DAO.Impl.StudentDataProcess;
+import studentmanagement.Dto.StudentDto;
+import studentmanagement.Util.UtilProcess;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 import java.io.IOException;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.SQLException;
 
-@WebServlet(urlPatterns = "/student")
+@WebServlet(urlPatterns = "/student",loadOnStartup = 2)
 public class StudentController extends HttpServlet {
     static Logger logger = LoggerFactory.getLogger(StudentController.class);
     Connection connection;
@@ -38,7 +40,7 @@ public class StudentController extends HttpServlet {
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }*/
-        logger.info("initializing StudenetController");
+        logger.info("Initializing StudentController ");
         try {
             var ctx = new InitialContext();
             DataSource pool = (DataSource) ctx.lookup("java:comp/env/jdbc/StudentManagementAAD");
@@ -62,6 +64,7 @@ public class StudentController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
         //Todo: Save student
         if (!req.getContentType().toLowerCase().startsWith("application/json") || req.getContentType() == null) {
             //send error
@@ -70,12 +73,14 @@ public class StudentController extends HttpServlet {
 
         // Persist Data
         try (var writer = resp.getWriter()) {
+
             Jsonb jsonb = JsonbBuilder.create();
             StudentDto studentDTO = jsonb.fromJson(req.getReader(), StudentDto.class);
             studentDTO.setId(UtilProcess.generateId());
 
             var saveStudent = studentData.saveStudent(studentDTO, connection);
             writer.write(saveStudent);
+            logger.info("Student Saved Successfully");
 
         } catch (Exception e) {
             throw new RuntimeException(e);

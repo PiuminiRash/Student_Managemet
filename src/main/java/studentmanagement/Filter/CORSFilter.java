@@ -1,4 +1,4 @@
-package lk.ijse.studentmanagement.Filter;
+package studentmanagement.Filter;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -9,7 +9,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebFilter("/*")
+@WebFilter(urlPatterns = "/*")
 public class CORSFilter extends HttpFilter {
 
     @Override

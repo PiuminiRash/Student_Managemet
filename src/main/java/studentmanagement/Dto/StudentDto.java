@@ -1,11 +1,10 @@
-package lk.ijse.studentmanagement.Dto;
+package studentmanagement.Dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

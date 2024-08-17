@@ -1,15 +1,16 @@
-package lk.ijse.studentmanagement.DAO.Impl;
+package studentmanagement.DAO.Impl;
 
 import jakarta.json.bind.Jsonb;
 import jakarta.json.bind.JsonbBuilder;
-import lk.ijse.studentmanagement.DAO.StudentData;
-import lk.ijse.studentmanagement.Dto.StudentDto;
+import studentmanagement.DAO.StudentData;
+import studentmanagement.Dto.StudentDto;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class StudentDataProcess implements StudentData {
     static String SAVE_STUDENT = "INSERT INTO student (id,name,city,age) VALUES (?,?,?,?)";
@@ -47,18 +48,18 @@ public class StudentDataProcess implements StudentData {
     @Override
     public String saveStudent(StudentDto studentDto, Connection connection) {
         try {
-            var ps = connection.prepareStatement(SAVE_STUDENT);
+             var ps = connection.prepareStatement(SAVE_STUDENT);
 
-            ps.setString(1,studentDto.getId());
-            ps.setString(2,studentDto.getName());
-            ps.setString(3,studentDto.getCity());
-            ps.setString(4,studentDto.getAge());
+             ps.setString(1,studentDto.getId());
+             ps.setString(2,studentDto.getName());
+             ps.setString(3,studentDto.getCity());
+             ps.setString(4,studentDto.getAge());
 
-            if (ps.executeUpdate() !=0){
-                return "Student Saved Successfully";
-            }else {
-                return "Unsuccessful";
-            }
+             if (ps.executeUpdate() !=0){
+                 return "Student Saved Successfully";
+             }else {
+                 return "Unsuccessful";
+             }
         }catch (SQLException e){
             throw new RuntimeException(e);
         }
@@ -66,18 +67,18 @@ public class StudentDataProcess implements StudentData {
 
     @Override
     public String deleteStudent(String id, Connection connection) {
-        try{
-            var ps = connection.prepareStatement(DELETE_STUDENT);
-            ps.setString(1,id);
+       try{
+           var ps = connection.prepareStatement(DELETE_STUDENT);
+           ps.setString(1,id);
 
-            if (ps.executeUpdate() !=0){
-                return "Deleted Successfully";
-            }else {
-                return "Deleted Unsuccessful";
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+           if (ps.executeUpdate() !=0){
+               return "Deleted Successfully";
+           }else {
+               return "Deleted Unsuccessful";
+           }
+       } catch (SQLException e) {
+           throw new RuntimeException(e);
+       }
     }
 
     @Override

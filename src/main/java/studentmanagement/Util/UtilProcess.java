@@ -1,4 +1,4 @@
-package lk.ijse.studentmanagement.Util;
+package studentmanagement.Util;
 
 import java.util.UUID;
 
