@@ -38,6 +38,7 @@ public class StudentDataProcess implements StudentData {
                 studentDto.setCity(resultSet.getString("city"));
                 studentDto.setAge(resultSet.getString("age"));
                 studentDtoList.add(studentDto);
+
             }
             Jsonb jsonb = JsonbBuilder.create();
             return jsonb.toJson(studentDtoList);
@@ -51,18 +52,18 @@ public class StudentDataProcess implements StudentData {
     @Override
     public String saveStudent(StudentDto studentDto, Connection connection) {
         try {
-             var ps = connection.prepareStatement(SAVE_STUDENT);
+            var ps = connection.prepareStatement(SAVE_STUDENT);
 
-             ps.setString(1,studentDto.getId());
-             ps.setString(2,studentDto.getName());
-             ps.setString(3,studentDto.getCity());
-             ps.setString(4,studentDto.getAge());
+            ps.setString(1,studentDto.getId());
+            ps.setString(2,studentDto.getName());
+            ps.setString(3,studentDto.getCity());
+            ps.setString(4,studentDto.getAge());
 
-             if (ps.executeUpdate() !=0){
-                 return "Student Saved Successfully";
-             }else {
-                 return "Unsuccessful";
-             }
+            if (ps.executeUpdate() !=0){
+                return "Student Saved Successfully";
+            }else {
+                return "Unsuccessful";
+            }
         }catch (SQLException e){
             throw new RuntimeException(e);
         }
@@ -70,18 +71,18 @@ public class StudentDataProcess implements StudentData {
 
     @Override
     public String deleteStudent(String id, Connection connection) {
-       try{
-           var ps = connection.prepareStatement(DELETE_STUDENT);
-           ps.setString(1,id);
+        try{
+            var ps = connection.prepareStatement(DELETE_STUDENT);
+            ps.setString(1,id);
 
-           if (ps.executeUpdate() !=0){
-               return "Deleted Successfully";
-           }else {
-               return "Deleted Unsuccessful";
-           }
-       } catch (SQLException e) {
-           throw new RuntimeException(e);
-       }
+            if (ps.executeUpdate() !=0){
+                return "Deleted Successfully";
+            }else {
+                return "Deleted Unsuccessful";
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
