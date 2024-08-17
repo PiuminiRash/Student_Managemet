@@ -10,6 +10,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import lk.ijse.studentmanagement.DAO.Impl.StudentDataProcess;
 import lk.ijse.studentmanagement.Dto.StudentDto;
 import lk.ijse.studentmanagement.Util.UtilProcess;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -19,6 +21,7 @@ import java.sql.*;
 
 @WebServlet(urlPatterns = "/student")
 public class StudentController extends HttpServlet {
+    static Logger logger = LoggerFactory.getLogger(StudentController.class);
     Connection connection;
     StudentDataProcess studentData = new StudentDataProcess();
 
@@ -35,6 +38,7 @@ public class StudentController extends HttpServlet {
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }*/
+        logger.info("initializing StudenetController");
         try {
             var ctx = new InitialContext();
             DataSource pool = (DataSource) ctx.lookup("java:comp/env/jdbc/StudentManagementAAD");
