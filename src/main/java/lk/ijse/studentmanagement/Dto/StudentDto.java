@@ -1,8 +1,3 @@
-/* Created By Sithira Roneth
- * Date :7/6/24
- * Time :10:29
- * Project Name :StudentManagment
- * */
 package lk.ijse.studentmanagement.Dto;
 
 import lombok.AllArgsConstructor;

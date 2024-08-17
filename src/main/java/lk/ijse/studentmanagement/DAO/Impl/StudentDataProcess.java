@@ -1,8 +1,3 @@
-/* Created By Sithira Roneth
- * Date :7/13/24
- * Time :13:03
- * Project Name :StudentManagment
- * */
 package lk.ijse.studentmanagement.DAO.Impl;
 
 import jakarta.json.bind.Jsonb;
